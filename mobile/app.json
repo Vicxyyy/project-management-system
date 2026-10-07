@@ -12,7 +12,7 @@
       "bundleIdentifier": "com.example.projectms"
     },
     "android": {
-      "package": "com.example.projectms"
+      "package": "com.projectms.app"
     },
     "web": {
       "bundler": "metro",
