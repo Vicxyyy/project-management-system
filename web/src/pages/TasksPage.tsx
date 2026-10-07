@@ -122,9 +122,14 @@ export default function TasksPage() {
                   </span>
                 </div>
               </div>
-              <p className="text-slate-400 text-sm flex-1 line-clamp-2 mb-6">
+              <p className="text-slate-400 text-sm flex-1 line-clamp-2 mb-2">
                 {task.description || 'No description'}
               </p>
+              {task.dueDate && (
+                <div className="text-xs text-indigo-300/80 font-medium mb-4 flex items-center gap-1">
+                  📅 Due: {new Date(task.dueDate).toLocaleDateString()}
+                </div>
+              )}
               
               <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-700/50" onClick={(e) => e.stopPropagation()}>
                 {task.status !== 'COMPLETED' ? (

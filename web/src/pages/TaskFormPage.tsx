@@ -15,6 +15,7 @@ export default function TaskFormPage() {
   const [status, setStatus] = useState<TaskStatus>('PENDING');
   const [priority, setPriority] = useState<TaskPriority>('MEDIUM');
   const [projectId, setProjectId] = useState('');
+  const [dueDate, setDueDate] = useState('');
 
   const { data: projectsData } = useQuery({
     queryKey: ['projects'],
@@ -44,6 +45,9 @@ export default function TaskFormPage() {
       setStatus(taskData.status);
       setPriority(taskData.priority);
       setProjectId(taskData.projectId);
+      if (taskData.dueDate) {
+        setDueDate(new Date(taskData.dueDate).toISOString().split('T')[0]);
+      }
     }
   }, [taskData]);
 
@@ -70,7 +74,14 @@ export default function TaskFormPage() {
       </h2>
 
       <div className="card p-6 sm:p-8">
-        <form onSubmit={(e) => { e.preventDefault(); mutation.mutate({ name, description, projectId, status, priority }); }} className="space-y-6">
+        <form onSubmit={(e) => { 
+          e.preventDefault(); 
+          const payload = { 
+            name, description, projectId, status, priority, 
+            dueDate: dueDate ? new Date(dueDate).toISOString() : null 
+          };
+          mutation.mutate(payload); 
+        }} className="space-y-6">
           {!isEditing && (
             <div>
               <label className="label">Project *</label>
@@ -109,6 +120,10 @@ export default function TaskFormPage() {
                 <option value="MEDIUM">Medium</option>
                 <option value="HIGH">High</option>
               </select>
+            </div>
+            <div>
+              <label className="label">Due Date</label>
+              <input type="date" className="input-field" value={dueDate} onChange={e => setDueDate(e.target.value)} />
             </div>
           </div>
           

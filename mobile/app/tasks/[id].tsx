@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator,
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { apiClient } from '../../lib/apiClient';
 import { Task, TaskStatus, TaskPriority, Project } from '../../types';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function TaskFormModal() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -14,6 +15,8 @@ export default function TaskFormModal() {
   const [projectId, setProjectId] = useState('');
   const [status, setStatus] = useState<TaskStatus>('PENDING');
   const [priority, setPriority] = useState<TaskPriority>('MEDIUM');
+  const [dueDate, setDueDate] = useState<Date | null>(null);
+  const [showDatePicker, setShowDatePicker] = useState(false);
   
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
@@ -35,6 +38,9 @@ export default function TaskFormModal() {
             setProjectId(task.projectId);
             setStatus(task.status);
             setPriority(task.priority);
+            if (task.dueDate) {
+              setDueDate(new Date(task.dueDate));
+            }
           } else {
             Alert.alert('Error', 'Task not found');
             router.back();
@@ -53,10 +59,14 @@ export default function TaskFormModal() {
     if (!name || (!isEditing && !projectId)) return Alert.alert('Error', 'Name and Project are required');
     setSaving(true);
     try {
+      const payload: any = { name, description, status, priority };
+      payload.dueDate = dueDate ? dueDate.toISOString() : null;
+      
       if (isEditing) {
-        await apiClient.put(`/tasks/${id}`, { name, description, status, priority });
+        await apiClient.put(`/tasks/${id}`, payload);
       } else {
-        await apiClient.post('/tasks', { name, description, projectId, status, priority });
+        payload.projectId = projectId;
+        await apiClient.post('/tasks', payload);
       }
       router.back();
     } catch (e: any) {
@@ -99,6 +109,25 @@ export default function TaskFormModal() {
           </TouchableOpacity>
         ))}
       </View>
+
+      <Text style={styles.label}>Due Date</Text>
+      <TouchableOpacity style={[styles.input, { justifyContent: 'center' }]} onPress={() => setShowDatePicker(true)}>
+        <Text style={{ color: dueDate ? '#000' : '#9ca3af' }}>
+          {dueDate ? dueDate.toISOString().split('T')[0] : 'Select Due Date'}
+        </Text>
+      </TouchableOpacity>
+      
+      {showDatePicker && (
+        <DateTimePicker
+          value={dueDate || new Date()}
+          mode="date"
+          display="default"
+          onChange={(event, selectedDate) => {
+            setShowDatePicker(false);
+            if (selectedDate) setDueDate(selectedDate);
+          }}
+        />
+      )}
 
       {isEditing && (
         <>

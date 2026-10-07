@@ -73,6 +73,11 @@ export default function TasksScreen() {
             {item.priority}
           </Text>
           <Text style={styles.dateText}>{new Date(item.createdAt).toLocaleDateString()}</Text>
+          {item.dueDate && (
+            <Text style={[styles.dateText, { color: '#8b5cf6', fontWeight: '500' }]}>
+              Due: {new Date(item.dueDate).toLocaleDateString()}
+            </Text>
+          )}
         </View>
       </View>
       
