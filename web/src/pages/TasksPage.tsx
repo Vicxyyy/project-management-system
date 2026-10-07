@@ -53,7 +53,7 @@ export default function TasksPage() {
           <h2 className="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">Tasks</h2>
           <p className="text-slate-400 mt-1">Track and manage your tasks.</p>
         </div>
-        <Link to="/tasks/new" className="btn-primary shrink-0">
+        <Link to="/tasks/new" className="btn-primary w-full sm:w-auto shrink-0">
           + New Task
         </Link>
       </div>

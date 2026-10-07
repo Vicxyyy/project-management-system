@@ -28,10 +28,10 @@ export default function ProjectDetailsPage() {
 
   return (
     <div className="space-y-8 animate-fade-in">
-      <div className="flex items-start justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <Link to="/projects" className="text-indigo-400 text-sm hover:underline mb-2 inline-block">&larr; Back to Projects</Link>
-          <h2 className="text-4xl font-bold text-slate-100">{project.name}</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-100">{project.name}</h2>
           <span className={`badge mt-3 ${
             project.status === 'COMPLETED' ? 'badge-success' : 
             project.status === 'IN_PROGRESS' ? 'badge-info' : 'badge-warning'
@@ -39,7 +39,7 @@ export default function ProjectDetailsPage() {
             {project.status.replace('_', ' ')}
           </span>
         </div>
-        <Link to={`/projects/${project.id}/edit`} className="btn-secondary">Edit Project</Link>
+        <Link to={`/projects/${project.id}/edit`} className="btn-secondary w-full sm:w-auto text-center justify-center">Edit Project</Link>
       </div>
 
       <div className="card p-6">
@@ -49,9 +49,9 @@ export default function ProjectDetailsPage() {
       </div>
 
       <div>
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
           <h3 className="text-2xl font-bold text-slate-100">Tasks</h3>
-          <Link to="/tasks/new" className="btn-primary py-1.5 px-4 text-xs">+ Add Task</Link>
+          <Link to="/tasks/new" className="btn-primary w-full sm:w-auto text-center justify-center py-1.5 px-4 text-sm sm:text-xs">+ Add Task</Link>
         </div>
         
         {tasksLoading ? (

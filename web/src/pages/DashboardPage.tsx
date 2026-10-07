@@ -53,11 +53,11 @@ export default function DashboardPage() {
         </div>
       )}
 
-      <div className="card p-8 bg-gradient-to-br from-slate-800/80 to-slate-900/80">
+      <div className="card p-6 sm:p-8 bg-gradient-to-br from-slate-800/80 to-slate-900/80">
         <h3 className="text-xl font-bold text-slate-200 mb-4">Quick Actions</h3>
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-4">
           <a href="/projects" className="btn-primary">Manage Projects</a>
-          <a href="/tasks" className="btn-secondary">View All Tasks</a>
+          <a href="/tasks" className="btn-secondary text-center justify-center">View All Tasks</a>
         </div>
       </div>
     </div>

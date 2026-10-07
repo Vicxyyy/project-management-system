@@ -43,7 +43,7 @@ export default function ProjectsPage() {
           <h2 className="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">Projects</h2>
           <p className="text-slate-400 mt-1">Manage all your projects in one place.</p>
         </div>
-        <Link to="/projects/new" className="btn-primary shrink-0">
+        <Link to="/projects/new" className="btn-primary w-full sm:w-auto shrink-0">
           + New Project
         </Link>
       </div>
@@ -52,12 +52,12 @@ export default function ProjectsPage() {
         <input
           type="text"
           placeholder="Search projects..."
-          className="input-field max-w-sm"
+          className="input-field w-full sm:max-w-sm"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <select
-          className="input-field max-w-[200px]"
+          className="input-field w-full sm:max-w-[200px]"
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
         >

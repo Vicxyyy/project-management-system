@@ -69,7 +69,7 @@ export default function TaskFormPage() {
         {isEditing ? 'Edit Task' : 'Create Task'}
       </h2>
 
-      <div className="card p-8">
+      <div className="card p-6 sm:p-8">
         <form onSubmit={(e) => { e.preventDefault(); mutation.mutate({ name, description, projectId, status, priority }); }} className="space-y-6">
           {!isEditing && (
             <div>
@@ -91,7 +91,7 @@ export default function TaskFormPage() {
             <textarea className="input-field min-h-[120px]" value={description} onChange={e => setDescription(e.target.value)} />
           </div>
           
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {isEditing && (
               <div>
                 <label className="label">Status</label>

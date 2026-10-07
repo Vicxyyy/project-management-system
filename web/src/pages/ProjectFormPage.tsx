@@ -53,7 +53,7 @@ export default function ProjectFormPage() {
         {isEditing ? 'Edit Project' : 'Create Project'}
       </h2>
 
-      <div className="card p-8">
+      <div className="card p-6 sm:p-8">
         <form onSubmit={(e) => { e.preventDefault(); mutation.mutate({ name, description, status }); }} className="space-y-6">
           <div>
             <label className="label">Project Name *</label>

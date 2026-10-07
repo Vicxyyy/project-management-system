@@ -7,23 +7,32 @@ const PAGE_TITLES: Record<string, string> = {
   '/tasks': 'Tasks',
 };
 
-export default function TopBar() {
+interface TopBarProps {
+  onMenuClick: () => void;
+}
+
+export default function TopBar({ onMenuClick }: TopBarProps) {
   const { pathname } = useLocation();
   const { user, logout } = useAuth();
   
   // Extract base path for title
   const basePath = '/' + pathname.split('/')[1];
-  const title = PAGE_TITLES[basePath] ?? 'Project Management System';
+  const title = PAGE_TITLES[basePath] ?? 'ProjectMS';
   const initials = user?.fullName?.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'U';
 
   return (
-    <header className="h-16 flex-shrink-0 bg-slate-900/50 backdrop-blur-xl border-b border-slate-700/50 flex items-center justify-between px-8 relative z-10 transition-all duration-300">
-      <h1 className="text-xl font-bold text-slate-100">{title}</h1>
+    <header className="h-16 flex-shrink-0 bg-slate-900/50 backdrop-blur-xl border-b border-slate-700/50 flex items-center justify-between px-4 sm:px-8 relative z-10 transition-all duration-300">
+      <div className="flex items-center gap-3">
+        <button onClick={onMenuClick} className="md:hidden p-1.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 rounded-lg transition-colors">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
+        </button>
+        <h1 className="text-lg sm:text-xl font-bold text-slate-100 truncate">{title}</h1>
+      </div>
 
       <div className="flex items-center gap-4">
         <span className="text-sm font-medium text-slate-400 hidden sm:block">{user?.email}</span>
         <div className="group relative">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-sm font-bold shadow-lg cursor-pointer ring-2 ring-slate-800 group-hover:ring-indigo-500 transition-all duration-300">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-sm font-bold shadow-lg cursor-pointer ring-2 ring-slate-800 group-hover:ring-indigo-500 transition-all duration-300">
             {initials}
           </div>
           <div className="absolute right-0 mt-2 w-48 bg-slate-800 rounded-xl shadow-xl border border-slate-700/50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right z-50">
