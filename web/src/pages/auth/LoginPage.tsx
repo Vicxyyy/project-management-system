@@ -74,7 +74,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <p className="mt-8 text-sm text-slate-400">
+          <p className="mt-8 text-sm text-slate-400 relative z-10">
             Don't have an account?{' '}
             <Link to="/register" className="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">
               Create one now
