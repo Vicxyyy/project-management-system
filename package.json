@@ -1,0 +1,28 @@
+{
+  "name": "project-management-system",
+  "version": "1.0.0",
+  "description": "Full Stack Developer Project Management System — monorepo root",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "web",
+    "mobile"
+  ],
+  "scripts": {
+    "backend:dev": "npm run dev --workspace=backend",
+    "backend:build": "npm run build --workspace=backend",
+    "backend:typecheck": "npm run typecheck --workspace=backend",
+    "backend:lint": "npm run lint --workspace=backend",
+    "backend:migrate": "npm run migrate --workspace=backend",
+    "backend:seed": "npm run seed --workspace=backend",
+    "web:dev": "npm run dev --workspace=web",
+    "web:build": "npm run build --workspace=web",
+    "web:typecheck": "npm run typecheck --workspace=web",
+    "mobile:start": "npm run start --workspace=mobile",
+    "mobile:typecheck": "npm run typecheck --workspace=mobile"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
